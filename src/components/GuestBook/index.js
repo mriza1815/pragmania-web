@@ -4,14 +4,26 @@ import { getTodayDate } from '../../utils';
 
 const GuestBook = props => {
 
-  const [guests, setGuests] = useState([])
+  const [guestBook, setGuestBook] = useState({loading: true, items: []})
   const [form, setForm] = useState({ name: null, date: null, subject: null, message: null })
-  
   const {name, subject, message} = form
+
+  useEffect(() => { prepareGuestBook()}, [])
+  useEffect(() => { if(guestBook.items.length) saveGuestBook()}, [guestBook])
+
+  const prepareGuestBook = () => {
+    const oldGuestBookData = localStorage.getItem("guestBook")
+    // Just want to see 1 second loading text
+    setTimeout(() => setGuestBook({loading: false, items: oldGuestBookData ? JSON.parse(oldGuestBookData) : []}), 1000)
+  }
 
   const handleOnChange = e => {
     const {name : inputName, value :  newValue} = e.currentTarget
     setForm(oldForm => ({...oldForm, [inputName]: newValue}))
+  }
+
+  const saveGuestBook = () => {
+    localStorage.setItem("guestBook", JSON.stringify(guestBook.items))
   }
 
   const isFormValid = () => name && subject && message
@@ -21,7 +33,7 @@ const GuestBook = props => {
   const saveNewGuest = e => {
     e.preventDefault()
     if(isFormValid()){
-      setGuests(oldGuests => [...oldGuests, {name, subject, message, date: getTodayDate()}])
+      setGuestBook(oldGuestBook => ({...oldGuestBook, items: [{name, subject, message, date: getTodayDate()}, ...oldGuestBook.items]}))
       resetForm()
     } else{
       alert("Please fill all fields!")
@@ -51,9 +63,10 @@ const GuestBook = props => {
     </form>
   )
 
-  const renderGuests = () => (
+  const renderGuestBook = () => (
     <div className="bg-dark p-2em scroll-list w-50 ml-2em guestbook-list">
-      {guests.map(renderGuest)}
+      {guestBook.loading ?  <span className="bold text-white text-center">Loading...</span>
+      : guestBook.items.map(renderGuest)}
     </div>
   )
   
@@ -62,7 +75,7 @@ const GuestBook = props => {
       <span className="bold h1 text-cream">GUESTBOOK</span>
       <div className="mt-1em d-flex row w-80">
         {renderForm()}
-        {renderGuests()}
+        {renderGuestBook()}
       </div>
     </section>
   );
