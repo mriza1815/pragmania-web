@@ -65,8 +65,12 @@ const GuestBook = props => {
 
   const renderGuestBook = () => (
     <div className="bg-dark p-2em scroll-list w-50 ml-2em guestbook-list">
-      {guestBook.loading ?  <span className="bold text-white text-center">Loading...</span>
-      : guestBook.items.map(renderGuest)}
+      { guestBook.loading ?  <span className="bold text-white text-center">Loading...</span>
+      : 
+      ( guestBook.items.length 
+        && guestBook.items.map(renderGuest) 
+        || <span className="bold text-white text-center">There is no entry!</span>
+      )}
     </div>
   )
   
