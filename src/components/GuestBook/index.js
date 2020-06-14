@@ -59,7 +59,7 @@ const GuestBook = props => {
       <input type="text" placeholder="Name" className="input mt-2em br-5" name="name" value={name} onChange={handleOnChange}/>
       <input type="text" placeholder="Subject" className="input mt-2em br-5" name="subject" value={subject} onChange={handleOnChange}/>
       <textarea placeholder="Message" className="textarea mt-2em br-5" rows={10} name="message" value={message} onChange={handleOnChange}>{message}</textarea>
-      <button className="fill-button self-center mt-2em bg-green" type="submit"><span className="text-dark">SEND</span></button>
+      <button className="btn-shadow self-center mt-2em bg-green bold br-5" type="submit"><span className="text-dark">SEND</span></button>
     </form>
   )
 

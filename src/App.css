@@ -1,3 +1,23 @@
+body {
+  font-family: 'Signika', sans-serif;
+}
+
+@font-face {
+  font-family: 'cafeta';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/fonts/CAFETA__.woff') format('woff');
+  /* src: local('cafeta'), url('CAFETA__.woff') format('woff'); */
+  }
+
+  .font-cafeta {
+  font-family: 'cafeta';  
+  line-height: 1.2em;
+  letter-spacing: 2px;
+  font-size: 4em;
+}
+
+.pos-rel{ position: relative; }
 .m-auto{ margin:auto !important }
 .mt-1em{ margin-top:1em !important }
 .mb-1em{ margin-bottom:1em !important }
@@ -20,6 +40,7 @@
 .p-1em{ padding:1em !important }
 .p-1_5em{ padding:1.5em !important }
 .p-2em{ padding:2em !important }
+.pb-2em{ padding-bottom: 2em;}
 .pv-90{ padding:90px 0 !important }
 .auto-width{ display:inline-block; width:auto}
 .col-2{ width:48%}
@@ -60,7 +81,9 @@
 .bg-green { background-color: #03b168;}
 .bg-gray { background-color: #464646;}
 .bg-red { background-color: #e84c3d;}
+.bg-footer-dark { background-color: #131313;}
 .bg-dark { background-color: #272727;}
+
 
 /* Flex Colors */
 .d-flex { display: flex }
@@ -77,6 +100,11 @@
 .flex-grow-vert { flex: 1 0 0}
 .self-center { align-self:center; }
 
+/* Media Queries */
+@media(min-width:768px) {
+  .d-flex.row { flex-flow: row nowrap;}
+}
+
 /* Width Classes */
 .w-100 { width: 100%}
 .w-80 { width: 80%}
@@ -84,6 +112,7 @@
 .w-30 { width: 30%}
 
 .br-5 {border-radius: 5px;}
+.disable {opacity: .5}
 
 .hr{ 
   height:1px;
@@ -95,6 +124,10 @@
 input { height: 50px;}
 
 /* Components */
+
+.text-shadow {
+  text-shadow: 4px 4px #272727;
+}
 
 .circle {
   width: 25px;
@@ -130,8 +163,8 @@ input { height: 50px;}
 }
 
 .fill-button {
-  border-radius: 10px;
-  padding: .75em 1.5em;
+  border-radius: 5px;
+  padding: .75em 2.5em;
   text-align: center;
   font-weight: 700;
   color: #fff;
@@ -139,6 +172,19 @@ input { height: 50px;}
   display: inline-flex;
   align-items: center;
   border: none;
+}
+
+.btn-shadow {
+  padding: 1.25em 3em;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: .5px;
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  box-shadow: 0 4px 9px 3px #202020;
+  font-size: 1em;
 }
 
 header {
@@ -152,15 +198,19 @@ header {
 }
 
 footer {
-  z-index: 2;
+  z-index: 4;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   min-height: 75px;;
-  background-color: #424242;
   color: white;
   text-align: center;
+}
+
+.hmbgr-btn {
+  display: none;
+  color: white;
 }
 
 .hz-list {
@@ -175,6 +225,11 @@ footer {
   font-weight: bold;
   margin-right: 1em;
   list-style-type: none;
+}
+
+@media screen and (max-width: 600px) {
+  .hmbgr-btn {display: block;}
+  .hz-list {display: none;}
 }
 
 .check-list {
@@ -255,4 +310,82 @@ footer {
   width: 19px;
   font-size: 20px;
   top: 2px;
+}
+
+section.head::after{
+  z-index: 1;
+  content: '';
+  position: absolute;
+  left: 47%;
+  top: 100%;
+  width: 0;
+  height: 0;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  border-top: 40px solid #a70f0b;
+  clear: both;
+}
+section.segment::after{
+  z-index: 1;
+  content: '';
+  position: absolute;
+  left: 5%;
+  top: 95%;
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 30px solid #ebebeb;
+  clear: both;
+}
+
+/* Sidebar */
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 5; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }

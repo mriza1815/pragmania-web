@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { copyrightText, footerNavItems } from "../../constants";
 
 const Footer = (props) => (
-  <footer class="footer d-flex justify-space row w-100 align-center">
+  <footer class="footer d-flex justify-space row w-100 align-center text-gray bg-footer-dark">
     <span className="ml-1em">{copyrightText}</span>
 
     <ul className="hz-list">
